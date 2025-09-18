@@ -12,7 +12,7 @@ import lombok.*;
 @Setter
 public class Usuario {
     @Id //Ele seta a chave primaria
-    @GeneratedValue // Ele gera um ID unico para cada usuário criado.
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
     private TipoUsuario tipo;
