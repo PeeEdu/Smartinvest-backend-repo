@@ -10,6 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 @Getter
 @Setter
+@Builder
 public class Usuario {
     @Id //Ele seta a chave primaria
     @GeneratedValue(strategy = GenerationType.IDENTITY)
