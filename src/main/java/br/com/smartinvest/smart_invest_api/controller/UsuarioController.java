@@ -5,10 +5,7 @@ import br.com.smartinvest.smart_invest_api.DTO.response.BaseResponse;
 import br.com.smartinvest.smart_invest_api.service.UsuarioService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/usuario")
@@ -30,7 +27,7 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public ResponseEntity<BaseResponse> saveUsuario(UsuarioRequestDTO usuarioRequestDTO) {
+    public ResponseEntity<BaseResponse> saveUsuario(@RequestBody UsuarioRequestDTO usuarioRequestDTO) {
         return ResponseEntity.status(HttpStatus.OK).
                 body(BaseResponse.builder()
                         .message("Usuario Salvo")
@@ -39,4 +36,16 @@ public class UsuarioController {
                         .build()
                 );
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<BaseResponse> updateUsuario(@PathVariable Long id, @RequestBody UsuarioRequestDTO usuarioRequestDTO) {
+        return ResponseEntity.status(HttpStatus.OK).
+                body(BaseResponse.builder()
+                        .message("Usuario Atualizado")
+                        .status("OK")
+                        .data(usuarioService.updateUsuario(usuarioRequestDTO, id))
+                        .build()
+                );
+    }
+
 }

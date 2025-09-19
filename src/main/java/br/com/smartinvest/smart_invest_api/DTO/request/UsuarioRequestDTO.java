@@ -5,7 +5,6 @@ import lombok.Builder;
 
 @Builder
 public record UsuarioRequestDTO(
-        String nome,
         TipoUsuario tipo
 ) {
 }
