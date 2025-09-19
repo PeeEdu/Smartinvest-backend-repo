@@ -22,7 +22,7 @@ public class UsuarioController {
     public ResponseEntity<BaseResponse> getUsuarios() {
         return ResponseEntity.status(HttpStatus.OK).body(BaseResponse.builder()
                 .message("Usuarios Listados")
-                .status("OK")
+                .status(HttpStatus.OK)
                 .data(usuarioService.getAllUsuarios())
                 .build()
         );
@@ -34,7 +34,7 @@ public class UsuarioController {
         return ResponseEntity.status(HttpStatus.OK).
                 body(BaseResponse.builder()
                         .message("Usuario Salvo")
-                        .status("OK")
+                        .status(HttpStatus.OK)
                         .data(usuarioService.saveUsuario(usuarioRequestDTO))
                         .build()
                 );
@@ -46,7 +46,7 @@ public class UsuarioController {
         return ResponseEntity.status(HttpStatus.OK).
                 body(BaseResponse.builder()
                         .message("Usuario Atualizado")
-                        .status("OK")
+                        .status(HttpStatus.OK)
                         .data(usuarioService.updateUsuario(usuarioRequestDTO, id))
                         .build()
                 );
