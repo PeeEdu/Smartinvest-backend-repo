@@ -1,5 +1,6 @@
 package br.com.smartinvest.smart_invest_api.controller;
 
+
 import br.com.smartinvest.smart_invest_api.DTO.request.UsuarioRequestDTO;
 import br.com.smartinvest.smart_invest_api.DTO.response.BaseResponse;
 import br.com.smartinvest.smart_invest_api.service.UsuarioService;
