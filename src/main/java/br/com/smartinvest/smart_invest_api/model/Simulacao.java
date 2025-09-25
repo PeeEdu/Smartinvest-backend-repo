@@ -30,11 +30,12 @@ public class Simulacao {
     @JoinColumn(name = "idUsuario", unique = true) // garante que cada usuario tenha no máximo 1 simulação
     private Usuario usuario;
 
+    //Criar Enum tipo investimento
     @Column(name = "tipoInvestimento")
     @Enumerated(EnumType.STRING)
     private TipoInvestimento tipo;
 
-    //Criar Enum tipo investimento
+
     @Column(name = "valorInicial")
     private BigDecimal valorInicial;
 

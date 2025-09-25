@@ -1,6 +1,7 @@
 package br.com.smartinvest.smart_invest_api.DTO.request;
 
 import br.com.smartinvest.smart_invest_api.enums.TipoInvestimento;
+import br.com.smartinvest.smart_invest_api.enums.TipoUsuario;
 import lombok.Builder;
 
 import java.math.BigDecimal;
@@ -9,6 +10,7 @@ import java.math.BigDecimal;
 public record SimulacaoRequestDTO(
         BigDecimal valorInicial,
         TipoInvestimento tipoInvestimento,
-        Double rentabilidadeEsperada
+        Double rentabilidadeEsperada,
+        TipoUsuario tipoUsuario
 ) {
 }
