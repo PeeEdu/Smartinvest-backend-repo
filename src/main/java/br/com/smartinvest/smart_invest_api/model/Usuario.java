@@ -15,19 +15,20 @@ import java.util.Date;
 @Builder
 @Table(name = "usuario")
 public class Usuario {
-    @Id //Ele seta a chave primaria
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idUsuario") // <-- Especifica o nome exato da coluna no banco
+    @Column(name = "idUsuario")
     private Long idUsuario;
 
     @Column(name = "dataCriacao")
     private Date dataCriacao;
-
 
     private String nome;
 
     @Enumerated(EnumType.STRING)
     private TipoUsuario tipo;
 
+    // Relacionamento 1:1
+    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private Simulacao simulacao;
 }
-
