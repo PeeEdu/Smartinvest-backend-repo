@@ -2,6 +2,7 @@ package br.com.smartinvest.smart_invest_api.service;
 
 import br.com.smartinvest.smart_invest_api.DTO.request.SimulacaoRequestDTO;
 import br.com.smartinvest.smart_invest_api.DTO.response.SimulacaoResponseDTO;
+import br.com.smartinvest.smart_invest_api.DTO.response.UsuarioResponseDTO;
 import br.com.smartinvest.smart_invest_api.mapper.SimulacaoMapper;
 import br.com.smartinvest.smart_invest_api.mapper.UsuarioMapper;
 import br.com.smartinvest.smart_invest_api.model.Simulacao;
@@ -21,11 +22,11 @@ import java.util.Date;
 public class SimulacaoService {
 
     private final SimulacaoRepository simulacaoRepository;
-    private final UsuarioRepository usuarioRepository;
+    private final UsuarioService usuarioService;
 
-    public SimulacaoService(SimulacaoRepository simulacaoRepository, UsuarioRepository usuarioRepository) {
+    public SimulacaoService(SimulacaoRepository simulacaoRepository, UsuarioService usuarioService) {
         this.simulacaoRepository = simulacaoRepository;
-        this.usuarioRepository = usuarioRepository;
+        this.usuarioService = usuarioService;
     }
 
     public List<SimulacaoResponseDTO> getAllSimulacoes() {
@@ -47,23 +48,18 @@ public class SimulacaoService {
     }
 
     public SimulacaoResponseDTO saveSimulacao(SimulacaoRequestDTO simulacaoRequestDTO) {
-        // Criar Simulação
         Simulacao simulacao = SimulacaoMapper.toSimulacao(simulacaoRequestDTO);
+        Usuario usuario = usuarioService.saveUsuario(simulacaoRequestDTO.tipoUsuario());
 
-        // Criar usuário automaticamente (com tipo default INICIANTE)
-        Usuario usuario = Usuario.builder()
-                .nome(UsuarioMapper.toUsuario(new br.com.smartinvest.smart_invest_api.DTO.request.UsuarioRequestDTO(TipoUsuario.INICIANTE)).getNome())
-                .tipo(TipoUsuario.INICIANTE)
-                .dataCriacao(new Date())
-                .simulacao(simulacao) // vincula a simulação ao usuário
-                .build();
+        if (usuario == null){
+            throw new RuntimeException("Usuario nao salvo");
+        }
 
         // Vincula usuário à simulação (relacionamento bidirecional)
         simulacao.setUsuario(usuario);
 
         // Salva primeiro a simulação (cascade ALL vai salvar o usuário)
         simulacaoRepository.save(simulacao);
-
         return SimulacaoMapper.toSimulacaoResponseDTO(simulacao);
     }
 }

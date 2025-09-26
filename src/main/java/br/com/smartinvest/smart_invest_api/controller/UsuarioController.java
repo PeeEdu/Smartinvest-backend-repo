@@ -27,29 +27,4 @@ public class UsuarioController {
                 .build()
         );
     }
-
-    @PostMapping
-    @Operation(summary = "Salvar Usuario")
-    public ResponseEntity<BaseResponse> saveUsuario(@RequestBody UsuarioRequestDTO usuarioRequestDTO) {
-        return ResponseEntity.status(HttpStatus.OK).
-                body(BaseResponse.builder()
-                        .message("Usuario Salvo")
-                        .status(HttpStatus.OK)
-                        .data(usuarioService.saveUsuario(usuarioRequestDTO))
-                        .build()
-                );
-    }
-
-    @PutMapping("/{id}")
-    @Operation(summary = "Atualizar Usuario")
-    public ResponseEntity<BaseResponse> updateUsuario(@PathVariable Long id, @RequestBody UsuarioRequestDTO usuarioRequestDTO) {
-        return ResponseEntity.status(HttpStatus.OK).
-                body(BaseResponse.builder()
-                        .message("Usuario Atualizado")
-                        .status(HttpStatus.OK)
-                        .data(usuarioService.updateUsuario(usuarioRequestDTO, id))
-                        .build()
-                );
-    }
-
 }
