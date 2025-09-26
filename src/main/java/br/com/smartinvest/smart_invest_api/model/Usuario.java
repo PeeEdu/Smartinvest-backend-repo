@@ -1,6 +1,7 @@
 package br.com.smartinvest.smart_invest_api.model;
 
 import br.com.smartinvest.smart_invest_api.enums.TipoUsuario;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -30,5 +31,6 @@ public class Usuario {
 
     // Relacionamento 1:1
     @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
+    @JsonIgnore
     private Simulacao simulacao;
 }

@@ -16,7 +16,6 @@ public record SimulacaoResponseDTO(
         Integer prazoMeses,
         Double rentabilidadeEsperada,
         TipoInvestimento tipoInvestimento,
-        Double taxaJuros,
         BigDecimal valorFinal,
         Date dataSimulacao
 ) {

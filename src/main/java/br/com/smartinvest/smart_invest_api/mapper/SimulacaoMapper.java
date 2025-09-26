@@ -24,6 +24,7 @@ public class SimulacaoMapper {
                 .idSimulacao(simulacao.getIdSimulacao())
                 .protocolo(simulacao.getProtocolo())
                 .idUsuario(simulacao.getUsuario().getIdUsuario())
+                .nomeUsuario(simulacao.getUsuario().getNome())
                 .valorInicial(simulacao.getValorInicial())
                 .tipoInvestimento(simulacao.getTipo())
                 .rentabilidadeEsperada(simulacao.getRentabilidadeEsperada())
