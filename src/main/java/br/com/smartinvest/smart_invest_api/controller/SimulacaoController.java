@@ -38,7 +38,6 @@ public class SimulacaoController {
                 .data(simulacaoService.saveSimulacao(simulacaoRequestDTO))
                 .build()
         );
-
     }
 
 
