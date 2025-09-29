@@ -1,6 +1,7 @@
 package br.com.smartinvest.smart_invest_api.controller;
 
 
+import br.com.smartinvest.smart_invest_api.DTO.request.SimulacaoRequestDTO;
 import br.com.smartinvest.smart_invest_api.DTO.response.BaseResponse;
 import br.com.smartinvest.smart_invest_api.service.SimulacaoService;
 import io.swagger.v3.oas.annotations.Operation;
