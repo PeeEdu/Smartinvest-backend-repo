@@ -23,15 +23,15 @@ public class UsuarioService {
         return usuarioRepository.findAll();
     }
 
-    public UsuarioResponseDTO saveUsuario(UsuarioRequestDTO usuarioRequestDTO) {
-        if (usuarioRequestDTO.tipo() == null) {
-            throw new RuntimeException("Precisa de um usuário");
+    public UsuarioResponseDTO saveUsuario(Usuario usuario) {
+        if (usuario == null) {
+            throw new RuntimeException("Usuario nao encontrado");
         }
 
-        Usuario usuario = UsuarioMapper.toUsuario(usuarioRequestDTO);
         usuarioRepository.save(usuario);
         return UsuarioMapper.toUsuarioResponseDTO(usuario);
     }
+
 
     public Usuario getUsuarioById(Long id) {
         return usuarioRepository.findById(id).orElse(null);
