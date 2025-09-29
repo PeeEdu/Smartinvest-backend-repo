@@ -1,17 +1,21 @@
 package br.com.smartinvest.smart_invest_api.service;
 
-
 import br.com.smartinvest.smart_invest_api.DTO.request.SimulacaoRequestDTO;
 import br.com.smartinvest.smart_invest_api.DTO.response.SimulacaoResponseDTO;
+import br.com.smartinvest.smart_invest_api.DTO.response.UsuarioResponseDTO;
 import br.com.smartinvest.smart_invest_api.mapper.SimulacaoMapper;
+import br.com.smartinvest.smart_invest_api.mapper.UsuarioMapper;
 import br.com.smartinvest.smart_invest_api.model.Simulacao;
 import br.com.smartinvest.smart_invest_api.model.Usuario;
 import br.com.smartinvest.smart_invest_api.repository.SimulacaoRepository;
+import br.com.smartinvest.smart_invest_api.repository.UsuarioRepository;
+import br.com.smartinvest.smart_invest_api.enums.TipoUsuario;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.Date;
 
 @Service
 @Slf4j
@@ -45,14 +49,16 @@ public class SimulacaoService {
 
     public SimulacaoResponseDTO saveSimulacao(SimulacaoRequestDTO simulacaoRequestDTO) {
         Simulacao simulacao = SimulacaoMapper.toSimulacao(simulacaoRequestDTO);
-        Usuario usuario = Usuario.builder()
-                .tipo(simulacaoRequestDTO.tipoUsuario())
-                .build();
+        Usuario usuario = usuarioService.saveUsuario(simulacaoRequestDTO.tipoUsuario());
 
-        usuario = usuarioService.saveUsuario(usuario);
+        if (usuario == null){
+            throw new RuntimeException("Usuario nao salvo");
+        }
 
+        // Vincula usuário à simulação (relacionamento bidirecional)
         simulacao.setUsuario(usuario);
-        
+
+        // Salva primeiro a simulação (cascade ALL vai salvar o usuário)
         simulacaoRepository.save(simulacao);
         return SimulacaoMapper.toSimulacaoResponseDTO(simulacao);
     }

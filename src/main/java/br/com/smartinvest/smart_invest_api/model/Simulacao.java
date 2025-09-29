@@ -1,7 +1,5 @@
 package br.com.smartinvest.smart_invest_api.model;
 
-
-
 import br.com.smartinvest.smart_invest_api.enums.TipoInvestimento;
 import br.com.smartinvest.smart_invest_api.enums.TipoUsuario;
 import jakarta.persistence.*;
