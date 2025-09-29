@@ -6,7 +6,6 @@ import br.com.smartinvest.smart_invest_api.mapper.UsuarioMapper;
 import br.com.smartinvest.smart_invest_api.model.Usuario;
 import br.com.smartinvest.smart_invest_api.repository.UsuarioRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -48,5 +47,4 @@ public class UsuarioService {
         usuarioRepository.save(usuario);
         return UsuarioMapper.toUsuarioResponseDTO(usuario);
     }
-
 }
