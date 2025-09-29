@@ -23,13 +23,13 @@ public class UsuarioService {
         return usuarioRepository.findAll();
     }
 
-    public UsuarioResponseDTO saveUsuario(Usuario usuario) {
+    public Usuario saveUsuario(Usuario usuario) {
         if (usuario == null) {
             throw new RuntimeException("Usuario nao encontrado");
         }
 
         usuarioRepository.save(usuario);
-        return UsuarioMapper.toUsuarioResponseDTO(usuario);
+        return usuario;
     }
 
 

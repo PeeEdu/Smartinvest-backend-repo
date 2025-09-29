@@ -49,13 +49,10 @@ public class SimulacaoService {
                 .tipo(simulacaoRequestDTO.tipoUsuario())
                 .build();
 
-        usuarioService.saveUsuario(usuario);
+        usuario = usuarioService.saveUsuario(usuario);
 
-        // Vincula usuário à simulação (relacionamento bidirecional)
         simulacao.setUsuario(usuario);
-
-
-        // Salva primeiro a simulação (cascade ALL vai salvar o usuário)
+        
         simulacaoRepository.save(simulacao);
         return SimulacaoMapper.toSimulacaoResponseDTO(simulacao);
     }
