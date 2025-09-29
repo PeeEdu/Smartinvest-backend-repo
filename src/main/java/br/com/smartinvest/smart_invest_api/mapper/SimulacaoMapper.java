@@ -13,7 +13,7 @@ public class SimulacaoMapper {
                 .protocolo(RandomUtil.getRandomAlphaNumeric(15))
                 .valorInicial(simulacaoRequestDTO.valorInicial())
                 .tipo(simulacaoRequestDTO.tipoInvestimento())
-                .rentabilidadeEsperada(simulacaoRequestDTO.rentabilidadeEsperada())
+                .taxaJuros(simulacaoRequestDTO.taxaJuros())
                 .dataSimulacao(new Date())
                 .build();
     }
@@ -27,7 +27,7 @@ public class SimulacaoMapper {
                 .nomeUsuario(simulacao.getUsuario().getNome())
                 .valorInicial(simulacao.getValorInicial())
                 .tipoInvestimento(simulacao.getTipo())
-                .rentabilidadeEsperada(simulacao.getRentabilidadeEsperada())
+                .taxaJuros(simulacao.getTaxaJuros())
                 .valorFinal(simulacao.getValorFinal())
                 .dataSimulacao(simulacao.getDataSimulacao())
                 .build();

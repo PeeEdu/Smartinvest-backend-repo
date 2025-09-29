@@ -14,7 +14,7 @@ public record SimulacaoResponseDTO(
         Long idUsuario,
         String nomeUsuario,
         Integer prazoMeses,
-        Double rentabilidadeEsperada,
+        Double taxaJuros,
         TipoInvestimento tipoInvestimento,
         BigDecimal valorFinal,
         Date dataSimulacao

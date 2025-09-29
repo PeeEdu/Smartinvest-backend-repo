@@ -43,7 +43,7 @@ public class SimulacaoService {
         Simulacao simulacao = simulacaoRepository.findById(id).orElseThrow(() -> new RuntimeException("Simulação não encontrada"));
         simulacao.setValorInicial(simulacaoRequestDTO.valorInicial());
         simulacao.setTipo(simulacaoRequestDTO.tipoInvestimento());
-        simulacao.setRentabilidadeEsperada(simulacaoRequestDTO.rentabilidadeEsperada());
+        simulacao.setTaxaJuros(simulacaoRequestDTO.taxaJuros());
         return SimulacaoMapper.toSimulacaoResponseDTO(simulacaoRepository.save(simulacao));
     }
 

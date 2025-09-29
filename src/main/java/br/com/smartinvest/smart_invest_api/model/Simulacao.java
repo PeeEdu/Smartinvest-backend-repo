@@ -42,8 +42,8 @@ public class Simulacao {
     @Column(name = "prazoMeses")
     private Integer prazoMeses;
 
-    @Column(name = "rentabilidadeEsperada")
-    private Double rentabilidadeEsperada;
+    @Column(name = "taxaJuros")
+    private Double taxaJuros;
 
     @Column(name = "valorFinal")
     private BigDecimal valorFinal;
