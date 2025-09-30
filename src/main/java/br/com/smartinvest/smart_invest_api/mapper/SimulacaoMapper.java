@@ -2,8 +2,8 @@ package br.com.smartinvest.smart_invest_api.mapper;
 
 import br.com.smartinvest.smart_invest_api.DTO.request.SimulacaoRequestDTO;
 import br.com.smartinvest.smart_invest_api.DTO.response.SimulacaoResponseDTO;
+import br.com.smartinvest.smart_invest_api.Util.RandomUtil;
 import br.com.smartinvest.smart_invest_api.model.Simulacao;
-import br.com.smartinvest.smart_invest_api.util.RandomUtil;
 
 import java.util.Date;
 
