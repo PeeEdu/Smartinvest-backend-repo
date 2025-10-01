@@ -14,6 +14,7 @@ public class SimulacaoMapper {
                 .valorInicial(simulacaoRequestDTO.valorInicial())
                 .tipo(simulacaoRequestDTO.tipoInvestimento())
                 .taxaJuros(simulacaoRequestDTO.taxaJuros())
+                .prazoMeses(simulacaoRequestDTO.prazoMeses())
                 .dataSimulacao(new Date())
                 .build();
     }
@@ -28,6 +29,7 @@ public class SimulacaoMapper {
                 .valorInicial(simulacao.getValorInicial())
                 .tipoInvestimento(simulacao.getTipo())
                 .taxaJuros(simulacao.getTaxaJuros())
+                .prazoMeses(simulacao.getPrazoMeses())
                 .valorFinal(simulacao.getValorFinal())
                 .dataSimulacao(simulacao.getDataSimulacao())
                 .build();

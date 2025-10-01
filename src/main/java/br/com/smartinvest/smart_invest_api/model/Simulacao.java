@@ -43,7 +43,7 @@ public class Simulacao {
     private Integer prazoMeses;
 
     @Column(name = "taxaJuros")
-    private Double taxaJuros;
+    private BigDecimal taxaJuros;
 
     @Column(name = "valorFinal")
     private BigDecimal valorFinal;

@@ -10,9 +10,11 @@ import br.com.smartinvest.smart_invest_api.model.Usuario;
 import br.com.smartinvest.smart_invest_api.repository.SimulacaoRepository;
 import br.com.smartinvest.smart_invest_api.repository.UsuarioRepository;
 import br.com.smartinvest.smart_invest_api.enums.TipoUsuario;
+import br.com.smartinvest.smart_invest_api.util.CalculoRendaFixaUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.Date;
@@ -44,6 +46,7 @@ public class SimulacaoService {
         simulacao.setValorInicial(simulacaoRequestDTO.valorInicial());
         simulacao.setTipo(simulacaoRequestDTO.tipoInvestimento());
         simulacao.setTaxaJuros(simulacaoRequestDTO.taxaJuros());
+        simulacao.setPrazoMeses(simulacaoRequestDTO.prazoMeses());
         return SimulacaoMapper.toSimulacaoResponseDTO(simulacaoRepository.save(simulacao));
     }
 
@@ -51,15 +54,23 @@ public class SimulacaoService {
         Simulacao simulacao = SimulacaoMapper.toSimulacao(simulacaoRequestDTO);
         Usuario usuario = usuarioService.saveUsuario(simulacaoRequestDTO.tipoUsuario());
 
-        if (usuario == null){
+        if (usuario == null) {
             throw new RuntimeException("Usuario nao salvo");
         }
 
-        // Vincula usuário à simulação (relacionamento bidirecional)
         simulacao.setUsuario(usuario);
 
-        // Salva primeiro a simulação (cascade ALL vai salvar o usuário)
+        // Calcula o valor final usando o utilitário
+        BigDecimal valorFinal = CalculoRendaFixaUtil.calcularValorFinal(
+                simulacao.getValorInicial(),
+                simulacao.getTaxaJuros(),
+                simulacao.getPrazoMeses()
+        );
+
+        simulacao.setValorFinal(valorFinal); // supondo que sua entidade tenha esse campo
+
         simulacaoRepository.save(simulacao);
         return SimulacaoMapper.toSimulacaoResponseDTO(simulacao);
     }
+
 }

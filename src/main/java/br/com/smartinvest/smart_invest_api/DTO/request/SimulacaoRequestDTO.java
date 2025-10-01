@@ -10,7 +10,8 @@ import java.math.BigDecimal;
 public record SimulacaoRequestDTO(
         BigDecimal valorInicial,
         TipoInvestimento tipoInvestimento,
-        Double taxaJuros,
+        BigDecimal taxaJuros,
+        Integer prazoMeses,
         TipoUsuario tipoUsuario
 ) {
 }
