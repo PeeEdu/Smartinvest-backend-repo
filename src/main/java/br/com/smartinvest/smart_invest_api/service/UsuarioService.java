@@ -2,13 +2,16 @@ package br.com.smartinvest.smart_invest_api.service;
 
 import br.com.smartinvest.smart_invest_api.DTO.request.UsuarioRequestDTO;
 import br.com.smartinvest.smart_invest_api.DTO.response.UsuarioResponseDTO;
+import br.com.smartinvest.smart_invest_api.enums.TipoUsuario;
 import br.com.smartinvest.smart_invest_api.mapper.UsuarioMapper;
 import br.com.smartinvest.smart_invest_api.model.Usuario;
 import br.com.smartinvest.smart_invest_api.repository.UsuarioRepository;
+import br.com.smartinvest.smart_invest_api.util.RandomUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -24,14 +27,19 @@ public class UsuarioService {
         return usuarioRepository.findAll();
     }
 
-    public UsuarioResponseDTO saveUsuario(UsuarioRequestDTO usuarioRequestDTO) {
-        if (usuarioRequestDTO.tipo() == null) {
-            throw new RuntimeException("Precisa de um usuário");
+    public Usuario saveUsuario(TipoUsuario tipoUsuario) {
+        if (tipoUsuario == null) {
+            throw new RuntimeException("Precisa de um tipo de usuário");
         }
 
-        Usuario usuario = UsuarioMapper.toUsuario(usuarioRequestDTO);
+        Usuario usuario = Usuario.builder()
+                .nome(RandomUtil.getRandomAlphaNumeric(5))
+                .simulacao(null)
+                .dataCriacao(new Date())
+                .tipo(tipoUsuario)
+                .build();
         usuarioRepository.save(usuario);
-        return UsuarioMapper.toUsuarioResponseDTO(usuario);
+        return usuario ;
     }
 
     public Usuario getUsuarioById(Long id) {

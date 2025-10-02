@@ -1,6 +1,7 @@
 package br.com.smartinvest.smart_invest_api.model;
 
 import br.com.smartinvest.smart_invest_api.enums.TipoUsuario;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -15,19 +16,21 @@ import java.util.Date;
 @Builder
 @Table(name = "usuario")
 public class Usuario {
-    @Id //Ele seta a chave primaria
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idUsuario") // <-- Especifica o nome exato da coluna no banco
+    @Column(name = "idUsuario")
     private Long idUsuario;
 
     @Column(name = "dataCriacao")
     private Date dataCriacao;
-
 
     private String nome;
 
     @Enumerated(EnumType.STRING)
     private TipoUsuario tipo;
 
+    // Relacionamento 1:1
+    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Simulacao simulacao;
 }
-
