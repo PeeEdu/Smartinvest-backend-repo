@@ -1,7 +1,7 @@
 package br.com.smartinvest.smart_invest_api.model;
 
 import br.com.smartinvest.smart_invest_api.enums.TipoInvestimento;
-import br.com.smartinvest.smart_invest_api.enums.TipoUsuario;
+import br.com.smartinvest.smart_invest_api.enums.TipoPerfil;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -17,39 +17,40 @@ import java.util.Date;
 @Setter
 @Table(name = "simulacao")
 public class Simulacao {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idSimulacao")
     private Long idSimulacao;
 
-    @Column(name = "protocolo")
+    @Column(name = "protocolo", nullable = false, unique = true)
     private String protocolo;
 
-    // Relacionamento 1:1
+    // Relacionamento 1:1 (cada usuário pode ter no máximo uma simulação)
     @OneToOne
-    @JoinColumn(name = "idUsuario", unique = true) // garante que cada usuario tenha no máximo 1 simulação
+    @JoinColumn(name = "idUsuario", unique = true)
     private Usuario usuario;
 
-    //Criar Enum tipo investimento
+    @Column(name = "tipoPerfil")
+    @Enumerated(EnumType.STRING)
+    private TipoPerfil tipoPerfil;
+
     @Column(name = "tipoInvestimento")
     @Enumerated(EnumType.STRING)
     private TipoInvestimento tipo;
 
-
-    @Column(name = "valorInicial")
+    @Column(name = "valorInicial", nullable = false)
     private BigDecimal valorInicial;
 
-    @Column(name = "prazoMeses")
+    @Column(name = "prazoMeses", nullable = false)
     private Integer prazoMeses;
 
-    @Column(name = "taxaJuros")
+    @Column(name = "taxaJuros", nullable = false)
     private BigDecimal taxaJuros;
 
     @Column(name = "valorFinal")
     private BigDecimal valorFinal;
 
-    @Column(name = "dataSimulacao")
+    @Column(name = "dataSimulacao", nullable = false)
     private Date dataSimulacao;
-
-
 }

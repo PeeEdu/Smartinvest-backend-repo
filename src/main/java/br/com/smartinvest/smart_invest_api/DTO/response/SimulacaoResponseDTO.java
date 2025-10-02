@@ -1,6 +1,8 @@
 package br.com.smartinvest.smart_invest_api.DTO.response;
 
 import br.com.smartinvest.smart_invest_api.enums.TipoInvestimento;
+import br.com.smartinvest.smart_invest_api.enums.TipoPerfil;
+import br.com.smartinvest.smart_invest_api.enums.TipoUsuario;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Builder;
 
@@ -9,14 +11,25 @@ import java.util.Date;
 
 @Builder
 public record SimulacaoResponseDTO(
+        // Identificação
         Long idSimulacao,
         String protocolo,
-        BigDecimal valorInicial,
+
+        // Usuário
         Long idUsuario,
         String nomeUsuario,
+        TipoUsuario tipoUsuario,
+
+        // Perfil e tipo de investimento
+        TipoPerfil tipoPerfil,
+        TipoInvestimento tipoInvestimento,
+
+        // Parâmetros da simulação
+        BigDecimal valorInicial,
         Integer prazoMeses,
         BigDecimal taxaJuros,
-        TipoInvestimento tipoInvestimento,
+
+        // Resultado
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "0.00")
         BigDecimal valorFinal,
         Date dataSimulacao

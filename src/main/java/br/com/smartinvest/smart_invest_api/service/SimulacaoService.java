@@ -3,6 +3,7 @@ package br.com.smartinvest.smart_invest_api.service;
 import br.com.smartinvest.smart_invest_api.DTO.request.SimulacaoRequestDTO;
 import br.com.smartinvest.smart_invest_api.DTO.response.SimulacaoResponseDTO;
 import br.com.smartinvest.smart_invest_api.DTO.response.UsuarioResponseDTO;
+import br.com.smartinvest.smart_invest_api.enums.TipoPerfil;
 import br.com.smartinvest.smart_invest_api.mapper.SimulacaoMapper;
 import br.com.smartinvest.smart_invest_api.mapper.UsuarioMapper;
 import br.com.smartinvest.smart_invest_api.model.Simulacao;
@@ -60,17 +61,24 @@ public class SimulacaoService {
 
         simulacao.setUsuario(usuario);
 
+        // Definir perfil de acordo com o tipo de usuário
+        switch (usuario.getTipo()) {
+            case INICIANTE -> simulacao.setTipoPerfil(TipoPerfil.CONSERVADOR);
+            case INTERMEDIARIO -> simulacao.setTipoPerfil(TipoPerfil.MODERADO);
+            case AVANCADO -> simulacao.setTipoPerfil(TipoPerfil.ARROJADO);
+        }
+
         // Calcula o valor final usando o utilitário
         BigDecimal valorFinal = CalculoRendaFixaUtil.calcularValorFinal(
                 simulacao.getValorInicial(),
                 simulacao.getTaxaJuros(),
                 simulacao.getPrazoMeses()
         );
-
-        simulacao.setValorFinal(valorFinal); // supondo que sua entidade tenha esse campo
+        simulacao.setValorFinal(valorFinal);
 
         simulacaoRepository.save(simulacao);
         return SimulacaoMapper.toSimulacaoResponseDTO(simulacao);
     }
+
 
 }

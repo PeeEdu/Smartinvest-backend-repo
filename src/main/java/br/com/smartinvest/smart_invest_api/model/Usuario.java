@@ -16,20 +16,24 @@ import java.util.Date;
 @Builder
 @Table(name = "usuario")
 public class Usuario {
+
+    // Identificador
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idUsuario")
     private Long idUsuario;
 
+    // Metadados
     @Column(name = "dataCriacao")
     private Date dataCriacao;
 
+    // Atributos principais
     private String nome;
 
     @Enumerated(EnumType.STRING)
     private TipoUsuario tipo;
 
-    // Relacionamento 1:1
+    // Relacionamentos
     @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
     @JsonIgnore
     private Simulacao simulacao;
