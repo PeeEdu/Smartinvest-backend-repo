@@ -26,7 +26,7 @@ public class Simulacao {
     @Column(name = "protocolo", nullable = false, unique = true)
     private String protocolo;
 
-    // Relacionamento 1:1 (cada usuário pode ter no máximo uma simulação)
+    // Relacionamento 1:1 com usuário
     @OneToOne
     @JoinColumn(name = "idUsuario", unique = true)
     private Usuario usuario;
@@ -45,12 +45,19 @@ public class Simulacao {
     @Column(name = "prazoMeses", nullable = false)
     private Integer prazoMeses;
 
-    @Column(name = "taxaJuros", nullable = false)
-    private BigDecimal taxaJuros;
-
     @Column(name = "valorFinal")
     private BigDecimal valorFinal;
 
     @Column(name = "dataSimulacao", nullable = false)
     private Date dataSimulacao;
+
+    // Relacionamento 1:1 com Renda Fixa (opcional)
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "idRendaFixa")
+    private RendaFixa rendaFixa;
+
+    // Relacionamento 1:1 com Renda Variável (opcional)
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "idRendaVariavel")
+    private RendaVariavel rendaVariavel;
 }
