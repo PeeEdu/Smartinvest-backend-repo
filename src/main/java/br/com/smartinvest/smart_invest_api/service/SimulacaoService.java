@@ -64,11 +64,10 @@ public class SimulacaoService {
     }
 
     public SimulacaoResponseDTO buscarPorProtocolo(String protocolo) {
-        //Chamar repositório para buscar no banco de dados
-        //Se a entidade não for encontrada, retornar 'null' para que o controller possa tratar
-        //Mapear a entidade para DTO (resposta)
-        return null;
+        Simulacao simulacao = simulacaoRepository.findByProtocolo(protocolo)
+                .orElseThrow(() -> new RuntimeException("Simulação não encontrada"));
 
-
+        return SimulacaoMapper.toSimulacaoResponseDTO(simulacao);
     }
+
 }
