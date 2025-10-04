@@ -1,10 +1,12 @@
 package br.com.smartinvest.smart_invest_api.DTO.request;
 
 import br.com.smartinvest.smart_invest_api.enums.TipoUsuario;
+import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 
 @Builder
 public record UsuarioRequestDTO(
+        @NotNull
         TipoUsuario tipo
 ) {
 }
