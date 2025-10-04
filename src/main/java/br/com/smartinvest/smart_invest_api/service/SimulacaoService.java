@@ -55,18 +55,10 @@ public class SimulacaoService {
             throw new RuntimeException("Usuario nao salvo");
         }
 
-        // Vincula usuário à simulação (relacionamento bidirecional)
         simulacao.setUsuario(usuario);
 
-        // Salva primeiro a simulação (cascade ALL vai salvar o usuário)
+
         simulacaoRepository.save(simulacao);
-        return SimulacaoMapper.toSimulacaoResponseDTO(simulacao);
-    }
-
-    public SimulacaoResponseDTO buscarPorProtocolo(String protocolo) {
-        Simulacao simulacao = simulacaoRepository.findByProtocolo(protocolo)
-                .orElseThrow(() -> new RuntimeException("Simulação não encontrada"));
-
         return SimulacaoMapper.toSimulacaoResponseDTO(simulacao);
     }
 
