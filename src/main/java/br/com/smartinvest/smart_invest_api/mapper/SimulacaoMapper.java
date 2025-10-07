@@ -2,9 +2,10 @@ package br.com.smartinvest.smart_invest_api.mapper;
 
 import br.com.smartinvest.smart_invest_api.DTO.request.SimulacaoRequestDTO;
 import br.com.smartinvest.smart_invest_api.DTO.response.SimulacaoResponseDTO;
-import br.com.smartinvest.smart_invest_api.Util.RandomUtil;
 import br.com.smartinvest.smart_invest_api.model.Simulacao;
+import br.com.smartinvest.smart_invest_api.util.RandomUtil;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class SimulacaoMapper {
@@ -13,22 +14,35 @@ public class SimulacaoMapper {
                 .protocolo(RandomUtil.getRandomAlphaNumeric(15))
                 .valorInicial(simulacaoRequestDTO.valorInicial())
                 .tipo(simulacaoRequestDTO.tipoInvestimento())
-                .taxaJuros(simulacaoRequestDTO.taxaJuros())
+                .prazoMeses(simulacaoRequestDTO.prazoMeses())
                 .dataSimulacao(new Date())
                 .build();
     }
 
 
     public static SimulacaoResponseDTO toSimulacaoResponseDTO(Simulacao simulacao) {
+        if (simulacao == null) {
+            return null;
+        }
+
+        // Pega os dados do investimento apenas se houver
+        String nomeInvestimento = null;
+        if (simulacao.getRendaFixa() != null) {
+            nomeInvestimento = simulacao.getRendaFixa().getNome();
+        }
+
         return SimulacaoResponseDTO.builder()
                 .idSimulacao(simulacao.getIdSimulacao())
                 .protocolo(simulacao.getProtocolo())
-                .idUsuario(simulacao.getUsuario().getIdUsuario())
-                .nomeUsuario(simulacao.getUsuario().getNome())
-                .valorInicial(simulacao.getValorInicial())
+                .idUsuario(simulacao.getUsuario() != null ? simulacao.getUsuario().getIdUsuario() : null)
+                .nomeUsuario(simulacao.getUsuario() != null ? simulacao.getUsuario().getNome() : null)
+                .tipoUsuario(simulacao.getUsuario() != null ? simulacao.getUsuario().getTipo() : null)
+                .tipoPerfil(simulacao.getTipoPerfil())
                 .tipoInvestimento(simulacao.getTipo())
-                .taxaJuros(simulacao.getTaxaJuros())
+                .valorInicial(simulacao.getValorInicial())
+                .prazoMeses(simulacao.getPrazoMeses())
                 .valorFinal(simulacao.getValorFinal())
+                .rendaFixa(simulacao.getRendaFixa())
                 .dataSimulacao(simulacao.getDataSimulacao())
                 .build();
     }

@@ -37,7 +37,7 @@ public class UsuarioService {
                 .simulacao(null)
                 .dataCriacao(new Date())
                 .tipo(tipoUsuario)
-                .build();
+                        .build();
         usuarioRepository.save(usuario);
         return usuario ;
     }
