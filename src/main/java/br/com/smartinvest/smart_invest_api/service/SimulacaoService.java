@@ -2,16 +2,12 @@ package br.com.smartinvest.smart_invest_api.service;
 
 import br.com.smartinvest.smart_invest_api.DTO.request.SimulacaoRequestDTO;
 import br.com.smartinvest.smart_invest_api.DTO.response.SimulacaoResponseDTO;
-import br.com.smartinvest.smart_invest_api.DTO.response.UsuarioResponseDTO;
 import br.com.smartinvest.smart_invest_api.enums.TipoPerfil;
 import br.com.smartinvest.smart_invest_api.mapper.SimulacaoMapper;
-import br.com.smartinvest.smart_invest_api.mapper.UsuarioMapper;
 import br.com.smartinvest.smart_invest_api.model.RendaFixa;
 import br.com.smartinvest.smart_invest_api.model.Simulacao;
 import br.com.smartinvest.smart_invest_api.model.Usuario;
 import br.com.smartinvest.smart_invest_api.repository.SimulacaoRepository;
-import br.com.smartinvest.smart_invest_api.repository.UsuarioRepository;
-import br.com.smartinvest.smart_invest_api.enums.TipoUsuario;
 import br.com.smartinvest.smart_invest_api.Util.CalculoRendaFixaUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

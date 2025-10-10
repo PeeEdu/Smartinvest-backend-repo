@@ -1,4 +1,4 @@
-package br.com.smartinvest.smart_invest_api.util;
+package br.com.smartinvest.smart_invest_api.Util;
 
 import br.com.smartinvest.smart_invest_api.model.RendaVariavel;
 import br.com.smartinvest.smart_invest_api.model.RendaVariavelHistorico;
@@ -22,8 +22,6 @@ public class RendaVariavelUtil {
     private final RendaVariavelHistoricoRepository historicoRepository;
     private final Random random = new Random();
 
-    // Executa a cada 2 minutos
-    //@Scheduled(fixedRate = 120000) <--- Atualiza valores a cada 2 minutos
     public void atualizarValores() {
         List<RendaVariavel> acoes = rendaVariavelRepository.findAll();
 

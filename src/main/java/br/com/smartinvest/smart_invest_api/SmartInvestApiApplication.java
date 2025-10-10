@@ -5,7 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
-//@EnableScheduling <--- Ativa o agendamento de tarefas
 public class SmartInvestApiApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SmartInvestApiApplication.class, args);
