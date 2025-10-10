@@ -2,15 +2,13 @@ package br.com.smartinvest.smart_invest_api.service;
 
 import br.com.smartinvest.smart_invest_api.DTO.request.UsuarioRequestDTO;
 import br.com.smartinvest.smart_invest_api.DTO.response.UsuarioResponseDTO;
+import br.com.smartinvest.smart_invest_api.Util.RandomUtil;
 import br.com.smartinvest.smart_invest_api.enums.TipoUsuario;
 import br.com.smartinvest.smart_invest_api.mapper.UsuarioMapper;
 import br.com.smartinvest.smart_invest_api.model.Usuario;
 import br.com.smartinvest.smart_invest_api.repository.UsuarioRepository;
-import br.com.smartinvest.smart_invest_api.util.RandomUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
-
 import java.util.Date;
 import java.util.List;
 

@@ -3,7 +3,7 @@ package br.com.smartinvest.smart_invest_api.mapper;
 import br.com.smartinvest.smart_invest_api.DTO.request.UsuarioRequestDTO;
 import br.com.smartinvest.smart_invest_api.DTO.response.UsuarioResponseDTO;
 import br.com.smartinvest.smart_invest_api.model.Usuario;
-import br.com.smartinvest.smart_invest_api.util.RandomUtil;
+import br.com.smartinvest.smart_invest_api.Util.RandomUtil;
 
 import java.util.Date;
 

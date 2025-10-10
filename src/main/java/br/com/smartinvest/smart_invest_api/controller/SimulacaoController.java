@@ -2,6 +2,7 @@ package br.com.smartinvest.smart_invest_api.controller;
 
 import br.com.smartinvest.smart_invest_api.DTO.request.SimulacaoRequestDTO;
 import br.com.smartinvest.smart_invest_api.DTO.response.BaseResponse;
+import br.com.smartinvest.smart_invest_api.DTO.response.SimulacaoResponseDTO;
 import br.com.smartinvest.smart_invest_api.service.SimulacaoService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.HttpStatus;
@@ -40,14 +41,15 @@ public class SimulacaoController {
         );
     }
 
-    @PutMapping
-    @Operation(summary = "Atualizar Simulação")
-    public ResponseEntity<BaseResponse> updateSimulacao(@RequestBody SimulacaoRequestDTO simulacaoRequestDTO, @PathVariable Long id) {
+    @GetMapping("/{protocolo}")
+    @Operation(summary = "Pega uma simulação pelo protocolo")
+    public ResponseEntity<BaseResponse> getByProtocolo(@PathVariable final String protocolo){
         return ResponseEntity.status(HttpStatus.OK).body(BaseResponse.builder()
-                .message("Simulação Atualizada")
+                .message("Achei sua simulação")
                 .status(HttpStatus.OK)
-                .data(simulacaoService.updateSimulacao(simulacaoRequestDTO, id))
+                .data(simulacaoService.getByProtocolo(protocolo))
                 .build()
         );
     }
+
 }

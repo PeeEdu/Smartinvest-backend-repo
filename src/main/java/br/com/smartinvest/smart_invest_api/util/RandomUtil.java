@@ -1,4 +1,4 @@
-package br.com.smartinvest.smart_invest_api.util;
+package br.com.smartinvest.smart_invest_api.Util;
 
 import java.util.Random;
 

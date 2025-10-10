@@ -12,7 +12,7 @@ import br.com.smartinvest.smart_invest_api.model.Usuario;
 import br.com.smartinvest.smart_invest_api.repository.SimulacaoRepository;
 import br.com.smartinvest.smart_invest_api.repository.UsuarioRepository;
 import br.com.smartinvest.smart_invest_api.enums.TipoUsuario;
-import br.com.smartinvest.smart_invest_api.util.CalculoRendaFixaUtil;
+import br.com.smartinvest.smart_invest_api.Util.CalculoRendaFixaUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -41,18 +41,6 @@ public class SimulacaoService {
                 .collect(Collectors.toList());
     }
 
-    public SimulacaoResponseDTO getSimulacaoById(Long id) {
-        return SimulacaoMapper.toSimulacaoResponseDTO(simulacaoRepository.findById(id).orElseThrow(() -> new RuntimeException("Simulação não encontrada")));
-    }
-
-    public SimulacaoResponseDTO updateSimulacao(SimulacaoRequestDTO simulacaoRequestDTO, Long id) {
-        Simulacao simulacao = simulacaoRepository.findById(id).orElseThrow(() -> new RuntimeException("Simulação não encontrada"));
-        simulacao.setValorInicial(simulacaoRequestDTO.valorInicial());
-        simulacao.setTipo(simulacaoRequestDTO.tipoInvestimento());
-        simulacao.setPrazoMeses(simulacaoRequestDTO.prazoMeses());
-        return SimulacaoMapper.toSimulacaoResponseDTO(simulacaoRepository.save(simulacao));
-    }
-
     public SimulacaoResponseDTO saveSimulacao(SimulacaoRequestDTO simulacaoRequestDTO) {
         Simulacao simulacao = SimulacaoMapper.toSimulacao(simulacaoRequestDTO);
         Usuario usuario = usuarioService.saveUsuario(simulacaoRequestDTO.tipoUsuario());
@@ -66,7 +54,6 @@ public class SimulacaoService {
         simulacao.setRendaFixa(rendaFixa);
         simulacao.setTipoPerfil(usuario != null ? TipoPerfil.values()[usuario.getTipo().ordinal()] : null);
 
-        // Calcula o valor final usando o utilitário somente se Renda Fixa existir
         if (rendaFixa != null) {
             BigDecimal valorFinal = CalculoRendaFixaUtil.calcularValorFinal(
                     simulacao.getValorInicial(),
@@ -81,4 +68,13 @@ public class SimulacaoService {
         simulacaoRepository.save(simulacao);
         return SimulacaoMapper.toSimulacaoResponseDTO(simulacao);
     }
+
+    public SimulacaoResponseDTO getByProtocolo(String protocolo) {
+        Simulacao simulacao = simulacaoRepository.findByProtocolo(protocolo)
+                .orElseThrow(() -> new RuntimeException("Simulação não encontrada"));
+
+        return SimulacaoMapper.toSimulacaoResponseDTO(simulacao);
+    }
+
+
 }

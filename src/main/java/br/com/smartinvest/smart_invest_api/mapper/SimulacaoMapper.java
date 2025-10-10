@@ -3,7 +3,7 @@ package br.com.smartinvest.smart_invest_api.mapper;
 import br.com.smartinvest.smart_invest_api.DTO.request.SimulacaoRequestDTO;
 import br.com.smartinvest.smart_invest_api.DTO.response.SimulacaoResponseDTO;
 import br.com.smartinvest.smart_invest_api.model.Simulacao;
-import br.com.smartinvest.smart_invest_api.util.RandomUtil;
+import br.com.smartinvest.smart_invest_api.Util.RandomUtil;
 
 import java.math.BigDecimal;
 import java.util.Date;

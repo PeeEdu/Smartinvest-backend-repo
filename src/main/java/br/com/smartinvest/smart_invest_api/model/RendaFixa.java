@@ -23,8 +23,8 @@ public class RendaFixa {
     @Column(nullable = false)
     private BigDecimal taxaMensal;
 
-    private String risco = "Baixo";
+    private String risco;
 
     @Column(name = "dataCriacao", nullable = false)
-    private Date dataCriacao = new Date();
+    private Date dataCriacao;
 }
